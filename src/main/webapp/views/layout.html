@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: blue;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="header :: header"></div>
+
+<main>
+    <div th:insert="~{::content}"></div>
+</main>
+
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

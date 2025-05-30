@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5f5f5;
+        }
+
+        a.button {
+            padding: 6px 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2>Danh sách sản phẩm</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>STT</th>
+        <th>Tên sản phẩm</th>
+        <th>Mô tả</th>
+        <th>Giá</th>
+        <th>Chi tiết</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product, stat : ${products}">
+        <td th:text="${stat.index + 1}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 2, 'POINT')} + ' VND'"></td>
+        <td>
+            <a th:href="@{'/product2/' + ${product.id}}" class="button">Xem chi tiết</a>
+        </td>
+        <td>
+            <form th:action="@{/cart/add}" method="post">
+                <input type="hidden" name="productId" th:value="${product.id}" />
+                <input type="number" name="quantity" value="1" min="1" style="width: 50px"/>
+                <button type="submit">Thêm vào giỏ</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
